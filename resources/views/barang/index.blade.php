@@ -104,6 +104,7 @@
 
 </section>
 <!-- /.content -->
+    {{ $barang->links() }}
 
 @endsection
 

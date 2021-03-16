@@ -51,12 +51,12 @@
               <!-- /.box-header -->
               <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
-                  <tr>
+                  <tr style="text-align: center"> 
                     <th>No.</th>
                     <th>Barang ID</th>
                     <th>Tanggal Awal</th>
                     <th>Harga Akhir</th>
-                    <th>Penawar</th>
+                    <th>Pemenang</th>
                     <th>Status</th>
                     <th>Action</th>
                   </tr>
@@ -94,7 +94,16 @@
                       @else
                         <a href='/lelang/ganti-status/{{ $l->id }}'> <button class="btn btn-danger">Tutup Lelang</button></a>
                       @endif
+
+                      <form action="{{ route('lelang.destroy',$l->id )}}" style="display:inline" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Ingin Menghapusnya?')"><i class="fa fa-trash"></i></button>
+                        </form>
+
                     </td>
+
+        
                   </tr>
 
 
@@ -115,7 +124,7 @@
 
 </section>
 <!-- /.content -->
-
+  {{ $lelang->links() }}
 @endsection
 
 

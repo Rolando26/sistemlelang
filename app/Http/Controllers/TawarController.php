@@ -43,7 +43,7 @@ class TawarController extends Controller
         }
 
         else{
-            return redirect('tawar-barang/'.$lelang->id);
+            return redirect('tawar-barang/'.$lelang->id)->with('error','Harga Yang Dimasukkan Terlalu Kecil');
         }
     }
 }

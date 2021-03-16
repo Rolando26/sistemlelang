@@ -60,7 +60,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'checkrole' => \App\Http\Middleware\CheckRole::class,
+        'TanpaAdmin' => \App\Http\Middleware\TanpaAdmin::class,
+        'TanpaPetugas' => \App\Http\Middleware\TanpaPetugas::class,
+        'TanpaMasyarakat' => \App\Http\Middleware\TanpaMasyarakat::class,
     ];
 
     /**

@@ -17,18 +17,27 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home','HomeController@index');
+Route::get('/index','HomeController@index');
 
-Route::resource('/barang','BarangController');
-Route::resource('users','UserController');
+Route::middleware(['auth','TanpaMasyarakat'])->group(function(){
+    Route::resource('/barang','BarangController');
+    Route::resource('users','UserController');
+});
 
-Route::get('lelang','LelangController@index');
-Route::get('lelang/ganti-status/{id}','LelangController@gantistatus');
-Route::get('detail-barang/{id}','LelangController@detail');
+Route::middleware(['auth','TanpaMasyarakat','TanpaAdmin'])->group(function(){
+    Route::get('lelang','LelangController@index')->name('lelang.index');
+    Route::get('lelang/ganti-status/{id}','LelangController@gantistatus');
+    Route::get('detail-barang/{id}','LelangController@detail');
+    Route::delete('lelang/{id}','LelangController@destroy')->name('lelang.destroy');
+});
 
-Route::get('tawar/','TawarController@index');
-Route::get('tawar-barang/{id}','TawarController@tawar');
-Route::post('store-tawar','TawarController@store');
+Route::middleware(['auth','TanpaAdmin','TanpaPetugas'])->group(function(){
+    Route::get('tawar/','TawarController@index');
+    Route::get('tawar-barang/{id}','TawarController@tawar');
+    Route::post('store-tawar','TawarController@store');
+});
 
-Route::get('/laporan','LaporanController@index');
-Route::get('/laporan/print','LaporanController@print');
+Route::middleware(['auth','TanpaMasyarakat'])->group(function(){
+    Route::get('/laporan','LaporanController@index');
+    Route::get('/laporan/print','LaporanController@print');
+});

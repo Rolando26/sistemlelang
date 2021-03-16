@@ -14,7 +14,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barang = Barang::all();
+        $barang = Barang::paginate(10);
         return view('barang.index',compact('barang'));
     }
 
@@ -45,7 +45,7 @@ class BarangController extends Controller
         
         $barang = Barang::create($request->all());
  
-        $lelang = new Lelang();
+        $lelang = new Lelang;
         $lelang->barang_id = $barang->id;
         $lelang->harga_akhir = $barang->harga_awal;
         $lelang->status = 'ditutup';

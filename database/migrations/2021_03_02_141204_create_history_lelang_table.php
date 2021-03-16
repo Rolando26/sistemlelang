@@ -16,9 +16,11 @@ class CreateHistoryLelangTable extends Migration
         Schema::create('history_lelang', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('lelang_id')->unsigned();
-            $table->foreign('lelang_id')->references('id')->on('lelang');
+            $table->foreign('lelang_id')->references('id')->on('lelang')->onDelete('cascade');
             $table->bigInteger('barang_id')->unsigned();
-            $table->foreign('barang_id')->references('id')->on('barang');
+            $table->foreign('barang_id')->references('id')->on('barang')->onDelete('cascade');
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('penawaran_harga');
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ class LelangController extends Controller
      */
     public function index()
     {
-        $lelang = Lelang::all();
+        $lelang = Lelang::paginate(10);
         return view('lelang.index',compact('lelang'));
     }
 
@@ -42,5 +42,16 @@ class LelangController extends Controller
       return view ('lelang.detail',compact('lelang','history'));
 
 
+    }
+
+    public function destroy($id)
+    {
+        $lelang = Lelang::find($id);
+        foreach($lelang->history as $history):
+            $history->delete();
+          
+        endforeach;
+        $lelang->delete();
+        return redirect()->route('lelang.index')->with('success','Data Berhasil Dihapus');
     }
 }
