@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Barang;
 use Illuminate\Http\Request;
 use App\Lelang;
 use App\History;
@@ -28,6 +29,8 @@ class HomeController extends Controller
     public function index()
     {
         $history = History::where('user_id',Auth::user()->id)->get();
-        return view('index',compact('history'));
+        $barang = Barang::all();
+        $user = User::all();
+        return view('index',compact('history','barang','user'));
     }
 }

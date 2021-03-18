@@ -15,7 +15,8 @@ class LelangController extends Controller
     public function index()
     {
         $lelang = Lelang::paginate(10);
-        return view('lelang.index',compact('lelang'));
+        $no = 1;
+        return view('lelang.index',compact('lelang','no'));
     }
 
     public function gantistatus($id)
@@ -49,7 +50,6 @@ class LelangController extends Controller
         $lelang = Lelang::find($id);
         foreach($lelang->history as $history):
             $history->delete();
-          
         endforeach;
         $lelang->delete();
         return redirect()->route('lelang.index')->with('success','Data Berhasil Dihapus');

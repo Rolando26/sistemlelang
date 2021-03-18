@@ -69,7 +69,7 @@
                   @else
                   @foreach ($lelang as $l)
                   <tr>
-                    <td>{{ !empty($i) ? ++$i : $i=1}}</td>
+                    <td>{{ $no++ }}</td>
                     <td>{{ $l->barang->nama_barang }}</td>
                     <td>{{ $l->created_at }}</td>
                     <td>Rp. {{ number_format($l->harga_akhir) }}</td>
@@ -115,8 +115,9 @@
             </div>
             <!-- /.box -->
           </div>
+        
         </div>
-            
+        {{ $lelang->links() }}
     </div>
     <!-- /.box-body -->
   </div>
@@ -124,7 +125,7 @@
 
 </section>
 <!-- /.content -->
-  {{ $lelang->links() }}
+
 @endsection
 
 
